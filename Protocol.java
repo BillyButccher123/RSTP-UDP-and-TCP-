@@ -1,7 +1,4 @@
-/*
- * Replace the following string of 0s with your student number
- * c4021942
- */
+
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
