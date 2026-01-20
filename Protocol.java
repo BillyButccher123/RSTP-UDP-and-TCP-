@@ -23,6 +23,8 @@ public class Protocol {
 	static final String  NORMAL_MODE="nm"   ;         // normal transfer mode: (for Part 1 and 2)
 	static final String	 TIMEOUT_MODE ="wt"  ;        // timeout transfer mode: (for Part 3)
 	static final String	 LOST_MODE ="wl"  ;           // lost Ack transfer mode: (for Part 4)
+	static final String	 TCP_MODE ="tcp"  ;           // lost Ack transfer mode: (for Part 4)
+	static final String	 UDP_MODE ="udp"  ;           // lost Ack transfer mode: (for Part 4)
 	static final int DEFAULT_TIMEOUT =1000  ;         // default timeout in milliseconds (for Part 3)
 	static final int DEFAULT_RETRIES =4  ;            // default number of consecutive retries (for Part 3)
 	public static final int MAX_Segment_SIZE = 4096;  //the max segment size that can be used when creating the received packet's buffer

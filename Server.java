@@ -43,6 +43,7 @@ public class Server {
 		Server server = new Server();
 		int portNumber = Integer.parseInt(args[0]);
 		String choice=args[1];
+		String protocol=args[2];
 
 		// create a UDP socket with the entere port number
 		ServerSocket = new DatagramSocket(portNumber);
@@ -65,22 +66,43 @@ public class Server {
 		System.out.println("SERVER: Waiting for the actual readings .."); 
 		System.out.println("------------------------------------------------------------------");
 		System.out.println("------------------------------------------------------------------");
+		switch(protocol){
+			case Protocol.TCP_MODE:
+				switch(choice)
+				{
+					//normal mode (ideal scenario)
+					case Protocol.NORMAL_MODE:
+						server.receiveNormal();
+						break;
 
-		switch(choice)
-		{
-		//normal mode (ideal scenario)
-		case Protocol.NORMAL_MODE:
-			server.receiveNormal();
-			break;
+					//Lost mode (lost Ack segments)
+					case Protocol.LOST_MODE:
+						Protocol.instance.receiveWithAckLoss(ServerSocket,loss);
+						break;
 
-		//Lost mode (lost Ack segments)
-		case Protocol.LOST_MODE:
-			Protocol.instance.receiveWithAckLoss(ServerSocket,loss);
-			break; 
+					default:
+						System.out.println("Error! mode is not recognised");
+				}
+			case Protocol.UDP_MODE:
+				switch(choice)
+				{
+					//normal mode (ideal scenario)
+					case Protocol.NORMAL_MODE:
+						server.receiveNormal();
+						break;
 
-		default:
-			System.out.println("Error! mode is not recognised");  
-		} 
+					//Lost mode (lost Ack segments)
+					case Protocol.LOST_MODE:
+						Protocol.instance.receiveWithAckLoss(ServerSocket,loss);
+						break;
+
+					default:
+						System.out.println("Error! mode is not recognised");
+				}
+			default:
+				System.out.println("Error! mode is not recognised");
+		}
+
 
 		sc.close();
 	}
